@@ -1,26 +1,8 @@
 import pygame
 from pygame.locals import *
+from function import *
 from map import *
-from support import draw_text
-
-# 初期化・グローバル変数
-# PlayerCharacter と main の両方から参照する変数
-scale_factor = 2
-chip_s = int(24*scale_factor)  # マップチップ基本サイズ
-map_s = pygame.Vector2(16, 12) # マップの横・縦の配置数
-disp_w = int(chip_s*map_s.x)   # ディスプレイの横の大きさ (wide)
-disp_h = int(chip_s*map_s.y)   # ディスプレイの縦の大きさ (height)
-
-red_note_move = 0    # 赤スイッチに重なったか
-blue_note_move = 0   # 青スイッチに重なったか
-purple_note_move = 0 # 紫スイッチに重なったか
-
-# 色を定義
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-CREAM = (255, 255, 220)
-
-SCR_RECT = Rect(0, 0, disp_w, disp_h) # 画面サイズ
+from setting import *
 
 # PlayerCharacter クラスの定義 ==========================================================================================================================================
 
@@ -56,15 +38,6 @@ class PlayerCharacter:
     
 # =======================================================================================================================================================================
 
-
-# 画像の読み込み
-def load_img(filename, colorkey=None):
-    img = pygame.image.load(filename).convert()
-    if (filename != "./data/img/tiles/floor.png") or (filename != "./data/img/tiles/wall.png"):
-        colorkey = (255, 255, 255)
-        img.set_colorkey(colorkey, RLEACCEL)
-    return img
-
 def main():
 
     # 初期化処理
@@ -72,6 +45,7 @@ def main():
     pygame.display.set_caption('音をつたえるあかりちゃん')
     screen = pygame.display.set_mode(SCR_RECT.size) # ディスプレイの大きさ
     
+    # 画像読み込み
     Map.imgs[0]  = load_img("./data/img/tiles/floor.png")          # 床
     Map.imgs[1]  = load_img("./data/img/tiles/wall.png")           # 壁
     Map.imgs[2]  = load_img("./data/img/tiles/shutter_close.png")  # 障害物(閉)
@@ -91,7 +65,6 @@ def main():
     map = Map()
 
     clock = pygame.time.Clock()
-    font = pygame.font.Font(None, 15)
     frame = 0
     switch_counter = 0 # スイッチに音符が何個乗ったか
     notes_counter = 0  # スイッチ(音符)の個数はいくつか 

@@ -128,10 +128,6 @@ def main():
             draw_text(screen, 'スイッチに乗せた音符は動かせなくなる！', disp_w//2, disp_h//2 - 90, 25, WHITE)
         elif (map.area_count == 4):
             draw_text(screen, 'ルール説明は以上！いってらっしゃい！', disp_w//2, disp_h//2 - 100, 30, WHITE)
-
-        # Thank you for playing!
-        if (map.area_count == 10):
-            draw_text(screen, 'Thank you for playing!!', disp_w//2, disp_h//2 - 30, 50, BLACK)
         
         # 音符の数を計測
         if (notes_counter == 0):
@@ -200,11 +196,6 @@ def main():
                 elif (event.key == pygame.K_ESCAPE): # Escapeキーの入力
                     exit_flag = True           # ゲームを終了させる
                     exit_code = '001'
-
-        # ステージクリア時の描画
-        if Stageclear:
-            draw_text(screen, 'Stage Clear!!', disp_w//2, disp_h//2, 70, BLACK)
-            draw_text(screen, "Press 'space Key' to next stage", disp_w//2, disp_h//2 + 60, 30, BLACK)
 
         # 移動コマンドの処理
         switch_checker = switch_counter # スイッチに乗っている音符の数を同期させる
@@ -513,6 +504,16 @@ def main():
         
         # 自キャラの描画
         screen.blit(akari.get_img(frame), akari.get_dp())
+
+        # ステージクリア時の描画
+        if Stageclear:
+            draw_text(screen, 'Stage Clear!!', disp_w//2, disp_h//2, 70, BLACK)
+            draw_text(screen, "Press 'space Key' to next stage", disp_w//2, disp_h//2 + 60, 30, BLACK)
+
+        
+        # Thank you for playing!
+        if (map.area_count == 10):
+            draw_text(screen, 'Thank you for playing!!', disp_w//2, disp_h//2 - 30, 50, BLACK)
 
         # アニメーション用フレーム
         if (Stageclear == False):

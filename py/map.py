@@ -292,7 +292,7 @@ class Map:
     row, col = 12, 16 # マップの行数,列数を取得
     imgs = [None] * 256              # マップチップ
     msize = 48                       # 1マスの大きさ[px]
-    area_count = 9                   # マップ切り替え
+    area_count = 0                   # マップ切り替え
     
     # マップの描画
     def draw(self, screen):
